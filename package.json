@@ -13,6 +13,7 @@
     "@mdi/font": "5.9.55",
     "@tauri-apps/api": "^1.1.0",
     "roboto-fontface": "*",
+    "sass": "^1.54.9",
     "vue": "^3.2.37",
     "vuetify": "npm:@vuetify/nightly@next",
     "webfontloader": "^1.0.0"
