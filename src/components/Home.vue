@@ -2,13 +2,12 @@
   <v-card>
     <v-toolbar flat class="topbar">
       <v-toolbar-title class="title">Web</v-toolbar-title>
-      <v-text-field />
-      <v-spacer></v-spacer>
-      <v-btn icon dark @click="$emit('save-settings')">
+      <v-text-field v-model="address" />
+      <v-btn icon dark @click="loadPage">
         <v-icon size="small">mdi-content-save-edit-outline</v-icon>
       </v-btn>
     </v-toolbar>
-    <content class="web-view" />
+    <content class="web-view" :file_address="file_add" />
   </v-card>
 </template>
 
@@ -19,10 +18,20 @@ export default {
     Content,
   },
 
-  data() {
+  data(): {
+    file_add: string;
+    address: string;
+  } {
     return {
-      //
+      file_add: '',
+      address: '/src/assets/hello.html',
     };
+  },
+
+  methods: {
+    loadPage() {
+      this.file_add = this.address;
+    },
   },
 };
 </script>
