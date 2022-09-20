@@ -1,4 +1,4 @@
-<div v-html="input"></div>
+<template><div v-html="input"></div></template>
 
 <script lang="ts">
 import { feachFile } from '../service/rest';
