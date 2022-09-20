@@ -4,7 +4,7 @@
       <v-toolbar-title class="title">Web</v-toolbar-title>
       <v-text-field v-model="address" />
       <v-btn icon dark @click="loadPage">
-        <v-icon size="small">mdi-content-save-edit-outline</v-icon>
+        <v-icon size="small">mdi-refresh</v-icon>
       </v-btn>
     </v-toolbar>
     <content class="web-view" :file_address="file_add" />
