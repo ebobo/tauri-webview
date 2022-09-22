@@ -3,8 +3,6 @@
 </template>
 
 <script lang="ts">
-import { feachFile } from '../service/rest';
-
 export default {
   data() {
     return {
