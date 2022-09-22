@@ -1,4 +1,6 @@
-<template><div v-html="input"></div></template>
+<template>
+  <iframe :src="file_address" title="description"></iframe>
+</template>
 
 <script lang="ts">
 import { feachFile } from '../service/rest';
@@ -7,7 +9,6 @@ export default {
   data() {
     return {
       input: '',
-      address: '/home/qi/Documents/HTMLs/page1.html',
     };
   },
 
@@ -17,11 +18,19 @@ export default {
       type: String,
     },
   },
-  watch: {
-    async file_address() {
-      this.input = await feachFile(this.file_address);
-      console.log(this.input);
+
+  methods: {
+    clicked() {
+      console.log('clicked ');
     },
+  },
+
+  watch: {
+    // async file_address() {
+    //   console.log('file_address');
+    //   this.input = await feachFile(this.file_address);
+    //   console.log(this.input);
+    // },
   },
 };
 </script>

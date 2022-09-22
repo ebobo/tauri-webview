@@ -6,6 +6,7 @@ const http = Axios.create({
 });
 
 export async function feachFile(url: string): Promise<any> {
+  console.log(url);
   return http.get(url).then((response) => {
     return response.data;
   });
