@@ -33,12 +33,6 @@ export default {
 
   mounted() {
     console.log('mounted');
-    const ifr = document.getElementById('iframeWindow') as HTMLIFrameElement;
-    if (ifr && ifr.contentWindow) {
-      // ifr.contentWindow.onbeforeunload = () => {
-      //   console.log('start load');
-      // };
-    }
   },
   methods: {
     clicked() {
@@ -46,7 +40,13 @@ export default {
     },
     load() {
       this.$emit('page-loaded');
-      // const ifr = document.getElementById('iframeWindow') as HTMLIFrameElement;
+      const ifr = document.getElementById('iframeWindow') as HTMLIFrameElement;
+      if (ifr && ifr.contentWindow) {
+        ifr.contentWindow.onunload = () => {
+          console.log('start load');
+          this.$emit('page-loading');
+        };
+      }
     },
     error() {
       console.log('error');
@@ -63,12 +63,12 @@ export default {
     },
     move_trigger(newValue: number, oldValue: number) {
       if (newValue > oldValue) {
-        this.$emit('page-loading');
+        // this.$emit('page-loading');
         // if (window.history.next) {
         window.history.forward();
         // }
       } else {
-        this.$emit('page-loading');
+        // this.$emit('page-loading');
         // const ifr = document.getElementById(
         //   'iframeWindow'
         // ) as HTMLIFrameElement;
