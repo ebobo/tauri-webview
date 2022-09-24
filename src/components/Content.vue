@@ -43,7 +43,7 @@ export default {
       const ifr = document.getElementById('iframeWindow') as HTMLIFrameElement;
       if (ifr && ifr.contentWindow) {
         ifr.contentWindow.onunload = () => {
-          console.log('start load');
+          // console.log('start load');
           this.$emit('page-loading');
         };
       }

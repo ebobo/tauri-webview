@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar>
+  <v-toolbar theme="main_theme">
     <img
       v-if="!loading"
       alt="Autronica Logo"
@@ -17,9 +17,7 @@
       color="gray"
     ></v-progress-circular>
     <v-spacer></v-spacer>
-    <!-- <v-btn icon @click="showScreenInfo">
-        <v-icon size="xsmall">mdi-monitor-screenshot</v-icon>
-      </v-btn> -->
+
     <v-btn icon @click="backward">
       <v-icon>mdi-step-backward</v-icon>
     </v-btn>
@@ -27,11 +25,16 @@
     <v-btn icon @click="forward">
       <v-icon>mdi-step-forward</v-icon>
     </v-btn>
-    <v-btn icon @click="hideObjectList">
-      <v-icon color="red">mdi-format-list-bulleted-triangle</v-icon>
+
+    <v-btn icon @click="refresh">
+      <v-icon>mdi-refresh</v-icon>
     </v-btn>
-    <v-btn icon @click="changeSettings">
-      <v-icon>mdi-cog-outline</v-icon>
+
+    <v-btn icon @click="print">
+      <v-icon>mdi-printer</v-icon>
+    </v-btn>
+    <v-btn icon @click="search">
+      <v-icon>mdi-text-box-search-outline</v-icon>
     </v-btn>
     <v-btn icon @click="changeTheme">
       <v-icon>mdi-brightness-4</v-icon>
@@ -71,11 +74,11 @@ export default {
       this.$emit('move-forward');
     },
 
-    changeSettings() {
-      this.$emit('change-settings');
+    changeTheme() {
+      this.$emit('change-theme');
     },
-    showScreenInfo() {
-      this.$emit('screen-info');
+    printPDF() {
+      this.$emit('print-pdf');
     },
   },
 };

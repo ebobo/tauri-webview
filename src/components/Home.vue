@@ -1,10 +1,11 @@
 <template>
-  <v-card :theme="main_theme" class="card">
+  <v-card :theme="theme" class="card">
     <nav-bar
-      :main_theme="main_theme"
+      :main_theme="theme"
       :loading="loadingPage"
       @move-backward="clickBackward"
       @move-forward="clickForward"
+      @change-theme="changeTheme"
     />
     <content
       class="web-view"
@@ -31,12 +32,14 @@ export default {
     htmlFile: File | null;
     moveNum: number;
     loadingPage: boolean;
+    theme: string;
   } {
     return {
       address: 'https://www.infopro-digital-automotive.it',
       htmlFile: null,
       moveNum: 0,
       loadingPage: false,
+      theme: 'light',
     };
   },
 
@@ -59,6 +62,14 @@ export default {
 
     setPageLoading(loading: boolean) {
       this.loadingPage = loading;
+    },
+
+    changeTheme() {
+      if (this.theme === 'dark') {
+        this.theme = 'light';
+      } else {
+        this.theme = 'dark';
+      }
     },
   },
 };
