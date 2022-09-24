@@ -1,38 +1,42 @@
 <template>
-  <v-card>
-    <v-toolbar flat class="topbar">
-      <v-toolbar-title class="title">File Loader</v-toolbar-title>
-      <v-file-input
-        accept=".html"
-        class="file-input"
-        label="File to load"
-        @click:clear="clearSelection"
-      ></v-file-input>
-      <v-text-field v-model="address" />
-      <v-btn icon dark @click="loadPage">
-        <v-icon size="small">mdi-refresh</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <content class="web-view" :file_address="file_add" />
+  <v-card :theme="main_theme" class="card">
+    <nav-bar
+      :main_theme="main_theme"
+      :loading="loadingPage"
+      @move-backward="clickBackward"
+      @move-forward="clickForward"
+    />
+    <content
+      class="web-view"
+      :page_address="address"
+      :move_trigger="moveNum"
+      @page-loaded="setPageLoading(false)"
+      @page-loading="setPageLoading(true)"
+    />
   </v-card>
 </template>
 
 <script lang="ts">
 import Content from './Content.vue';
+import NavBar from './NavBar.vue';
+
 export default {
   components: {
     Content,
+    NavBar,
   },
 
   data(): {
-    file_add: string;
     address: string;
     htmlFile: File | null;
+    moveNum: number;
+    loadingPage: boolean;
   } {
     return {
-      file_add: '',
-      address: '/src/assets/hello.html',
+      address: 'https://www.infopro-digital-automotive.it',
       htmlFile: null,
+      moveNum: 0,
+      loadingPage: false,
     };
   },
 
@@ -41,23 +45,36 @@ export default {
       this.file_add = this.address;
     },
 
+    clickBackward() {
+      this.moveNum--;
+    },
+
+    clickForward() {
+      this.moveNum++;
+    },
+
     clearSelection() {
       this.htmlFile = null;
+    },
+
+    setPageLoading(loading: boolean) {
+      this.loadingPage = loading;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.web-view {
-  height: 600px;
-  width: 900px;
-  background-color: pink;
+.card {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
 }
-.file-view {
-  height: 400px;
-  width: 900px;
-  background-color: orange;
+
+.web-view {
+  display: flex;
+  flex: 1 1;
+  background-color: pink;
 }
 
 .file-input {

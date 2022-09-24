@@ -1,19 +1,34 @@
 <template>
-  <iframe :src="file_address" title="description"></iframe>
+  <iframe
+    ref="iframeRef"
+    :src="page_address"
+    title="page"
+    :onload="load"
+    :onunload="error"
+    style="border: none"
+    seamless
+  ></iframe>
+  <!-- <vue-iframe  :src="page_address"></vue-iframe> -->
 </template>
 
 <script lang="ts">
 export default {
+  emits: ['page-loading', 'page-loaded'],
   data() {
     return {
       input: '',
+      currentIframeURL: '',
     };
   },
 
   props: {
-    file_address: {
+    page_address: {
       required: true,
       type: String,
+    },
+    move_trigger: {
+      required: true,
+      type: Number,
     },
   },
 
@@ -21,14 +36,36 @@ export default {
     clicked() {
       console.log('clicked ');
     },
+    load() {
+      this.$emit('page-loaded');
+      this.currentIframeURL = this.$refs.iframeRef.getAttribute('src');
+      console.log(this.currentIframeURL);
+    },
+    error() {
+      console.log('error');
+      this.$emit('page-loaded');
+    },
+    test() {
+      console.log('test');
+    },
   },
 
   watch: {
-    // async file_address() {
-    //   console.log('file_address');
-    //   this.input = await feachFile(this.file_address);
-    //   console.log(this.input);
-    // },
+    page_address() {
+      this.$emit('page-loading');
+    },
+    move_trigger(newValue: number, oldValue: number) {
+      if (newValue > oldValue) {
+        this.$emit('page-loading');
+        // if (window.history.next) {
+        window.history.forward();
+        // }
+      } else {
+        this.$emit('page-loading');
+        window.history.back();
+        // console.log(this.$refs.iframeRef.getAttribute('src'));
+      }
+    },
   },
 };
 </script>
