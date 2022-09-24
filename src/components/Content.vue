@@ -1,10 +1,9 @@
 <template>
   <iframe
-    ref="iframeRef"
+    id="iframeWindow"
     :src="page_address"
     title="page"
     :onload="load"
-    :onunload="error"
     style="border: none"
     seamless
   ></iframe>
@@ -17,7 +16,7 @@ export default {
   data() {
     return {
       input: '',
-      currentIframeURL: '',
+      iframeWindow: null,
     };
   },
 
@@ -32,14 +31,22 @@ export default {
     },
   },
 
+  mounted() {
+    console.log('mounted');
+    const ifr = document.getElementById('iframeWindow') as HTMLIFrameElement;
+    if (ifr && ifr.contentWindow) {
+      // ifr.contentWindow.onbeforeunload = () => {
+      //   console.log('start load');
+      // };
+    }
+  },
   methods: {
     clicked() {
       console.log('clicked ');
     },
     load() {
       this.$emit('page-loaded');
-      this.currentIframeURL = this.$refs.iframeRef.getAttribute('src');
-      console.log(this.currentIframeURL);
+      // const ifr = document.getElementById('iframeWindow') as HTMLIFrameElement;
     },
     error() {
       console.log('error');
@@ -62,6 +69,16 @@ export default {
         // }
       } else {
         this.$emit('page-loading');
+        // const ifr = document.getElementById(
+        //   'iframeWindow'
+        // ) as HTMLIFrameElement;
+        // if (ifr) {
+        //   const ifrWindow = ifr.contentWindow;
+        //   if (ifrWindow) {
+        //     console.log(ifrWindow.);
+        //   }
+        // }
+        // ifr.contentWindow?.history.back();
         window.history.back();
         // console.log(this.$refs.iframeRef.getAttribute('src'));
       }

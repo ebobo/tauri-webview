@@ -44,14 +44,7 @@ import logo from '../assets/autronica_logo.png';
 import darkLogo from '../assets/autronica_logo_dark.png';
 
 export default {
-  emits: [
-    'change-theme',
-    'change-size',
-    'change-settings',
-    'screen-info',
-    'show-object-list',
-    'hide-object-list',
-  ],
+  emits: ['change-theme', 'change-size', 'change-settings', 'screen-info'],
   props: {
     main_theme: {
       required: true,
@@ -83,12 +76,6 @@ export default {
     },
     showScreenInfo() {
       this.$emit('screen-info');
-    },
-    showObjectList() {
-      this.$emit('show-object-list');
-    },
-    hideObjectList() {
-      this.$emit('hide-object-list');
     },
   },
 };
