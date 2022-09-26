@@ -5,6 +5,7 @@
       :loading="loadingPage"
       @move-backward="clickBackward"
       @move-forward="clickForward"
+      @move-home="clickHome"
       @change-theme="changeTheme"
     />
     <content
@@ -28,6 +29,7 @@ export default {
   },
 
   data(): {
+    homeAddress: string;
     address: string;
     htmlFile: File | null;
     moveNum: number;
@@ -35,7 +37,8 @@ export default {
     theme: string;
   } {
     return {
-      address: 'https://www.infopro-digital-automotive.it',
+      homeAddress: 'http://localhost',
+      address: 'http://localhost',
       htmlFile: null,
       moveNum: 0,
       loadingPage: false,
@@ -50,6 +53,10 @@ export default {
 
     clickBackward() {
       this.moveNum--;
+    },
+
+    clickHome() {
+      this.address = this.homeAddress;
     },
 
     clickForward() {
@@ -85,7 +92,6 @@ export default {
 .web-view {
   display: flex;
   flex: 1 1;
-  background-color: pink;
 }
 
 .file-input {

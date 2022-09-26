@@ -16,7 +16,6 @@
     "roboto-fontface": "*",
     "sass": "^1.54.9",
     "vue": "^3.2.37",
-    "vue-iframes": "^0.0.20",
     "vuetify": "npm:@vuetify/nightly@next",
     "webfontloader": "^1.0.0"
   },

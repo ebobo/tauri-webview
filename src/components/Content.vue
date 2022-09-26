@@ -7,7 +7,6 @@
     style="border: none"
     seamless
   ></iframe>
-  <!-- <vue-iframe  :src="page_address"></vue-iframe> -->
 </template>
 
 <script lang="ts">
@@ -31,35 +30,31 @@ export default {
     },
   },
 
-  mounted() {
-    console.log('mounted');
-  },
   methods: {
-    clicked() {
-      console.log('clicked ');
-    },
     load() {
       this.$emit('page-loaded');
-      const ifr = document.getElementById('iframeWindow') as HTMLIFrameElement;
-      if (ifr && ifr.contentWindow) {
-        ifr.contentWindow.onunload = () => {
-          // console.log('start load');
-          this.$emit('page-loading');
-        };
-      }
+      // const ifr = document.getElementById('iframeWindow') as HTMLIFrameElement;
+      // if (ifr && ifr.contentWindow) {
+      //   ifr.contentWindow.onunload = () => {
+      //     // console.log('start load');
+      //     this.$emit('page-loading');
+      //   };
+      // }
     },
     error() {
       console.log('error');
       this.$emit('page-loaded');
     },
-    test() {
-      console.log('test');
-    },
   },
 
   watch: {
     page_address() {
-      this.$emit('page-loading');
+      // this.$emit('page-loading');
+      console.log('reload page');
+      const ifr = document.getElementById('iframeWindow') as HTMLIFrameElement;
+      if (ifr) {
+        ifr.src = 'http://localhost';
+      }
     },
     move_trigger(newValue: number, oldValue: number) {
       if (newValue > oldValue) {
@@ -86,3 +81,14 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+/* .content {
+  background-color: aquamarine;
+}
+.frame {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+} */
+</style>

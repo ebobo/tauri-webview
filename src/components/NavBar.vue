@@ -8,6 +8,7 @@
       :src="mainIconPath"
       transition="scale-transition"
       width="50"
+      @click="homePage"
     />
     <v-progress-circular
       v-if="loading"
@@ -67,6 +68,10 @@ export default {
     },
   },
   methods: {
+    homePage() {
+      console.log('click home');
+      this.$emit('move-home');
+    },
     backward() {
       this.$emit('move-backward');
     },
